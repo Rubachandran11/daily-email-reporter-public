@@ -1,19 +1,15 @@
 {
-  "name": "daily-email-reporter",
+  "name": "daily-report-sender",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dailyReport.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dailyReport.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "axios": "^1.9.0",
-    "dotenv": "^16.5.0",
-    "node-cron": "^4.1.0",
-    "nodemailer": "^7.0.3",
+    "axios": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "nodemailer": "^6.9.1",
     "xlsx": "^0.18.5"
   }
 }
+
