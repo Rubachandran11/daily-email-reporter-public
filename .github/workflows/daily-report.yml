@@ -2,7 +2,7 @@ name: Daily Report Sender
 
 on:
   schedule:
-    - cron: '20 7 * * *'  # 🕐 Runs at 12:50 PM IST daily
+    - cron: '25 7 * * *'  # 🕐 Runs at 12:50 PM IST daily
   workflow_dispatch:       # ✅ Allows manual trigger too
 
 jobs:
