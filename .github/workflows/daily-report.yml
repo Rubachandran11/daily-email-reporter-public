@@ -1,0 +1,37 @@
+name: Daily Report Sender
+
+on:
+  schedule:
+    - cron: '10 6 * * *'   # ⏰ Runs daily at 2:20 AM IST (20:50 UTC)
+  workflow_dispatch:        # Allows manual trigger
+
+jobs:
+  send-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create .env file
+        run: |
+          echo "EMAIL_USER=${{ secrets.EMAIL_USER }}" >> .env
+          echo "EMAIL_PASS=${{ secrets.EMAIL_PASS }}" >> .env
+          echo "RECEIVER_EMAIL=${{ secrets.RECEIVER_EMAIL }}" >> .env
+
+      - name: Print IST Date
+        run: |
+          node -e "const d = new Date(Date.now() + 5.5 * 60 * 60 * 1000); console.log('🕒 IST Date:', d.toISOString().slice(0, 10))"
+
+      - name: Run Daily Report
+        run: |
+          DATE=$(node -e "const d = new Date(Date.now() + 5.5 * 60 * 60 * 1000); console.log(d.toISOString().slice(0, 10))")
+          node dailyReport.js --date=$DATE
