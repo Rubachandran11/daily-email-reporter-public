@@ -2,15 +2,14 @@ name: Daily Report Sender
 
 on:
   schedule:
-    - cron: '25 7 * * *'  # 🕐 Runs at 12:50 PM IST daily
-  workflow_dispatch:       # ✅ Allows manual trigger too
-
+    - cron: '35 7 * * *'  # 👉 Triggers at 1:05 PM IST (GitHub uses UTC)
+    
 jobs:
   send-report:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -27,11 +26,11 @@ jobs:
           echo "EMAIL_PASS=${{ secrets.EMAIL_PASS }}" >> .env
           echo "RECEIVER_EMAIL=${{ secrets.RECEIVER_EMAIL }}" >> .env
 
-      - name: Print IST Date
+      - name: Print IST Time (to confirm)
         run: |
-          node -e "const d = new Date(Date.now() + 5.5 * 60 * 60 * 1000); console.log('🕒 IST Date:', d.toISOString().slice(0, 10))"
+          node -e "const d = new Date(Date.now() + 5.5 * 60 * 60 * 1000); console.log('🕒 IST Time:', d.toLocaleString())"
 
-      - name: Run Daily Report
+      - name: Run Report Script
         run: |
           DATE=$(node -e "const d = new Date(Date.now() + 5.5 * 60 * 60 * 1000); console.log(d.toISOString().slice(0, 10))")
           node dailyReport.js --date=$DATE
