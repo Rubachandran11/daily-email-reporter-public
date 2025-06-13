@@ -1,4 +1,5 @@
 name: Daily Report Sender
+# Scheduled to run daily at 12:20 PM IST
 
 on:
   schedule:
