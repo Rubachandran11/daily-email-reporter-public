@@ -1,11 +1,9 @@
 name: Daily Report Sender
 
-
 on:
   schedule:
-    - cron: '25 6 * * *'   # ⏰ Runs daily at 11:55 AM IST (06:25 UTC)
-  workflow_dispatch:        # Allows manual trigger
-
+    - cron: '50 6 * * *'  # ⏰ Triggers daily at 12:20 PM IST
+  workflow_dispatch:
 
 jobs:
   send-report:
